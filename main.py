@@ -1,19 +1,21 @@
 import requests
+
 from schemas import Converter
 from fastapi import FastAPI
-
+from pydantic import ValidationError
 
 app = FastAPI()
-
-a = {'id': 'qwe', 'symbol': 'qwewee', 'snt_new': 123}
 
 
 @app.get("/{coin}")
 async def test_model(coin: str):
     user_coin = requests.get(f'https://api.coingecko.com/api/v3//coins/{coin}').json()
-    output = Converter(**user_coin)
-    return output
-
+    try:
+        output = Converter(**user_coin)
+    except ValidationError as error:
+        print(error.json())
+    else:
+        return output
 
 @app.get("/about_coin/{coin}")
 async def about_coin(coin: str):
