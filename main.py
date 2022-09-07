@@ -1,13 +1,11 @@
+import requests
+import schemas
+
 from fastapi import FastAPI
 
 app = FastAPI()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+@app.get("/{coin}")
+async def main(coin: str):
+    return requests.get(f'https://api.coingecko.com/api/v3//coins/list').json()
