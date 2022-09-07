@@ -1,9 +1,12 @@
-from pydantic import BaseModel
-
+from pydantic import BaseModel, Field
+from typing import Union
+from datetime import date
 
 class Converter(BaseModel):
-    coin: str = ' '
-    Description: str = ' '
-    to_EUR: float
-    to_USD: float
-    to_BYN: float
+    name: str
+    categories: list
+    creation_date: date = Field(alias='genesis_date')
+    coin_rank: int = Field(alias='coingecko_rank')
+    links: dict
+
+
