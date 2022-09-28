@@ -17,13 +17,14 @@ async def test_model(coin: str):
     else:
         return output
 
+
 @app.get("/about_coin/{coin}")
 async def about_coin(coin: str):
-    user_coin = requests.get(f'https://api.coingecko.com/api/v3//coins/{coin}').json()
-    return user_coin
+    get_about_coin = requests.get(f'https://api.coingecko.com/api/v3//coins/{coin}').json()
+    return get_about_coin
 
 
-@app.get("/list_of_coins")
+@app.get("/list/get_list")
 async def list_of_coins():
-    user_coin = requests.get(f'https://api.coingecko.com/api/v3//coins/list').json()
-    return user_coin
+    get_list_of_coins = requests.get(f'https://api.coingecko.com/api/v3/coins/list').json()
+    return get_list_of_coins
